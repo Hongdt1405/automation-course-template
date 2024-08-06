@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import com.utils.BasicTest;
 import com.utils.Utils;
 
-public class LoginTest extends BasicTest {
+public class RegisterTest extends BasicTest {
 
 
     // @Test()
