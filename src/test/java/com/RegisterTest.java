@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.pages.RegisterPage;
 import com.utils.BasicTest;
 import com.utils.Utils;
 
@@ -16,19 +17,23 @@ public class RegisterTest extends BasicTest {
         String url = "https://bantheme.xyz/hathanhauto/tai-khoan/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
+        RegisterPage registerpage = new RegisterPage(driver);
 
 
         // Enter username
+        registerpage.enterEmail("Mincaodt@gmail.com");
 
-        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("hongdo14051995@gmail.com");
+        //driver.findElement(By.xpath("//input[@id='username']")).sendKeys("hongdo14051995@gmail.com");
         Utils.hardWait(); // 3s
 
         // Enter password
-        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Mincao@1405");
+        registerpage.enterPassword("Mincao@123");
+        //driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Mincao@1405");
         Utils.hardWait();
 
-        // Click login
-        driver.findElement(By.xpath("//button[@name='login']")).click();
+        // Click register
+        registerpage.clickRegister();
+        //driver.findElement(By.xpath("//button[@name='register']")).click();
         Utils.hardWait();
         // Verify
         // Boolean displayed;
@@ -62,27 +67,33 @@ public class RegisterTest extends BasicTest {
         String url = "https://bantheme.xyz/hathanhauto/tai-khoan/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
+        RegisterPage registerpage = new RegisterPage(driver);
 
 
         // Enter email
-
-         driver.findElement(By.xpath("//input[@id='reg_email']")).sendKeys("mincaodt@gmail.com");
+        registerpage.enterEmail("");
+    
+        // driver.findElement(By.xpath("//input[@id='reg_email']")).sendKeys("mincaodt@gmail.com");
         // Utils.hardWait(); // 3s
 
         // Enter password
+        registerpage.enterPassword("Mincao@123");
+
        // driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Mincao@1405");
         Utils.hardWait();
 
         // Click register
-        driver.findElement(By.xpath("//button[@name='register']")).click();
+        registerpage.clickRegister();
+
+        //driver.findElement(By.xpath("//button[@name='register']")).click();
         Utils.hardWait();
         // Verify
         
         String errorMessage;
 
         try {
-
-            errorMessage = driver.findElement(By.xpath("//ul[@class='woocommerce-error']")).getText();
+            errorMessage= registerpage.getErrorMessage();
+            //errorMessage = driver.findElement(By.xpath("//ul[@class='woocommerce-error']")).getText();
         } catch (Exception e ){
             errorMessage = "Lỗi: Vui lòng nhập mật khẩu tài khoản.";
         };
@@ -94,33 +105,38 @@ public class RegisterTest extends BasicTest {
             String url = "https://bantheme.xyz/hathanhauto/tai-khoan/";
             driver.get(url);
             Assert.assertEquals(driver.getCurrentUrl(), url);
+            RegisterPage registerpage = new RegisterPage(driver);
     
     
             // Enter username
+            registerpage.enterEmail("mincaodt@gmail.com");
+            
     
              //driver.findElement(By.xpath("//input[@id='username']")).sendKeys("hongdo14051995@gmail.com");
             // Utils.hardWait(); // 3s
     
             // Enter password
-            driver.findElement(By.xpath("//input[@id='reg_password']")).sendKeys("Mincao@1405");
+            registerpage.enterPassword("");
+            //driver.findElement(By.xpath("//input[@id='reg_password']")).sendKeys("Mincao@1405");
             Utils.hardWait();
     
             // Click register
-            driver.findElement(By.xpath("//button[@name='register']")).click();
+            registerpage.clickRegister();
+            //driver.findElement(By.xpath("//button[@name='register']")).click();
             Utils.hardWait();
             // Verify
             
             String errorMessage;
     
             try {
-    
-                errorMessage = driver.findElement(By.xpath("//div[@class='woocommerce-notices-wrapper']")).getText();
+                errorMessage=registerpage.getErrorMessage();
+                //errorMessage = driver.findElement(By.xpath("//div[@class='woocommerce-notices-wrapper']")).getText();
             } catch (Exception e ){
                 errorMessage = "";
             };
             
 
-        Assert.assertEquals(errorMessage, "Lỗi: Vui lòng cung cấp địa chỉ email hợp lệ.");
+        Assert.assertEquals(errorMessage, "Lỗi: Vui lòng nhập mật khẩu tài khoản.");
 
 
     }
